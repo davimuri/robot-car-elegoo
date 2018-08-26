@@ -106,13 +106,24 @@ float calculatePID(float pos, float setValue) {
   float pid = (error * kp) + (integral * ki) + (derivative * kd);
 
   if (LOGS_ON) {
-    Serial.print(error);
-    Serial.print("|");
-    Serial.print(derivative);
-    Serial.print("|");
-    Serial.print(integral);
-    Serial.print("|");
-    Serial.print(pid);
+    //Serial.println(error);
+    //Serial.println(integral);
+    char toPrint[43] = "";
+    char value[10] = "";
+    //error value to char array
+    dtostrf(error, 10, 2, value);
+    strcat(toPrint, value);
+    strcat(toPrint, "|");
+    dtostrf(integral, 10, 2, value);
+    strcat(toPrint, value);
+    strcat(toPrint, "|");
+    dtostrf(derivative, 10, 2, value);
+    strcat(toPrint, value);
+    strcat(toPrint, "|");
+    dtostrf(pid, 10, 2, value);
+    strcat(toPrint, value);
+    
+    Serial.println(toPrint);
   }
   return pid;
 }
